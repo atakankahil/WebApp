@@ -1,0 +1,49 @@
+﻿@model List<App.Web.Models.Domain.Product>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="container">
+    <div class="row">
+        <a class="btn btn-success" asp-action="Create">Insert New Product</a>
+    </div>
+    
+       @for (int i = 0; i < Model.Count; i++)
+       {
+           var item = Model[i];
+
+           if(i % 3 == 0)
+           {
+               @:<div class="row">
+           }
+
+        <div class="col-md-3 m-4">
+            <div class="card" style="width: 18rem; height: 18rem;">
+
+                <div class="card-body">
+                    <h3 class="card-title">@item.Name</h3>
+                    <p class="card-text">@item.Description</p>
+                    
+                    
+                    <h6>Price: $@item.Price</h6>
+                </div>
+
+                <div class="card-footer">
+                    <a asp-controller="Products" asp-action="AddProductToCart" asp-route-id="@item.Id" class="btn btn-info">Add to Cart</a>
+                    <a asp-controller="Products" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-secondary">Edit</a>
+                </div>
+            </div>
+        </div>
+
+
+           if(i % 3 == 2)
+           {
+               @:</div>
+           }
+       }
+</div>
